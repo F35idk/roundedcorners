@@ -107,6 +107,11 @@ namespace Gala.Plugins.RoundedCorners
             this.corner_radius = (float) corner_radius;
             this.corner_offset = (float) corner_offset;
             this.smoothing_level = (float) smoothing_level;
+            
+            message ("corner radius: %f", this.corner_radius);
+            message ("corner offset: %f", this.corner_offset);
+            message ("smoothing level: %f", this.smoothing_level);
+            
             // we may be doing more maths than necessary with these offsets
             this.set_frame_to_buffer_offsets (window);
         }
@@ -141,6 +146,11 @@ namespace Gala.Plugins.RoundedCorners
             this.top_vert_offset = frame_rect.y - buffer_rect.y + 2f;
             this.total_hor_offset = buffer_rect.width - frame_rect.width + 3f;
             this.total_vert_offset = buffer_rect.height - frame_rect.height + 3f;
+            
+            message ("left horizontal frame offset: %f", this.left_hor_offset);
+            message ("top vertical frame offset: %f", this.top_vert_offset);
+            message ("total horizontal frame offset: %f", this.total_hor_offset);
+            message ("total vertical frame offset: %f", this.total_vert_offset);
         }
     }
 }
