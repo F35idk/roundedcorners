@@ -48,37 +48,21 @@ namespace Gala.Plugins.RoundedCorners
         {
             Clutter.Actor? texture_actor = this.get_texture_actor (window);
             if (texture_actor != null) {
-                Meta.Rectangle rect = window.get_frame_rect ();
-                int screen_height, screen_width;
-                window.get_screen ().get_size (out screen_width, out screen_height);
                 var corner_effect = texture_actor.get_effect ("corner_effect") as CornerEffect;
-                
-                if (corner_effect != null
-                    && rect.height > screen_height - corner_effect.top_vert_offset
-                    && rect.y < corner_effect.total_vert_offset- corner_effect.top_vert_offset) {
+                if (window.fullscreen || window.maximized_horizontally || window.maximized_vertically)
                     texture_actor.remove_effect_by_name ("corner_effect");
-                }
-                else if (rect.height < screen_height - 35 || rect.y > 35) { // 35px
+                else
                     this.add_effect_to_window (window);
-                }
             }
         }
         
         void add_effect_to_window (Meta.Window window)
         {
             Clutter.Actor? texture_actor = this.get_texture_actor (window);
-            if (texture_actor != null && texture_actor.get_effect ("corner_effect") == null) {
-                
-                var settings = RoundedCornerSettings.get_default ();
-                string shader_source;
-                if (window.decorated)
-                    FileUtils.get_contents (Config.PKGDATADIR + "/BorderedCornerEffect.frag", out shader_source);
-                else
-                    FileUtils.get_contents (Config.PKGDATADIR + "/BorderlessCornerEffect.frag", out shader_source);
-                var corner_effect = new CornerEffect (window, shader_source, settings.corner_radius, 
-                                                        settings.corner_offset, settings.smoothing_level);
-                texture_actor.add_effect_with_name ("corner_effect", corner_effect);
-            }
+            var settings = RoundedCornerSettings.get_default ();
+            var corner_effect = new CornerEffect (window, settings.corner_radius, 
+                                                    settings.corner_offset, settings.smoothing_level);
+            texture_actor.add_effect_with_name ("corner_effect", corner_effect);
         }
         
         Clutter.Actor? get_texture_actor (Meta.Window window)
@@ -99,9 +83,12 @@ namespace Gala.Plugins.RoundedCorners
         public float total_hor_offset { get; private set; default = 3f; }
         public float total_vert_offset { get; private set; default = 3f; }
         
-        public CornerEffect (Meta.Window window, string shader_source, double corner_radius, double corner_offset, double smoothing_level)
+        public CornerEffect (Meta.Window window, double corner_radius, double corner_offset, double smoothing_level)
         {
             Object (shader_type: Clutter.ShaderType.FRAGMENT_SHADER);
+            
+            string shader_source;
+            FileUtils.get_contents (Config.PKGDATADIR + "/CornerEffect.frag", out shader_source);
             
             this.set_shader_source (shader_source);
             this.corner_radius = (float) corner_radius;

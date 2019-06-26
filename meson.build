@@ -14,7 +14,6 @@ gala_transparentgrab_lib = shared_library(
 )
 
 install_data(
-	'shaders/BorderlessCornerEffect.frag',
-    'shaders/BorderedCornerEffect.frag',
+    'shaders/CornerEffect.frag',
 	install_dir: pkgdata_dir,
 )
