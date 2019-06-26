@@ -1,0 +1,23 @@
+--- org.pantheon.desktop.gala.gschema.xml.in	2019-06-22 12:58:40.074256000 +0200
++++ new-org.pantheon.desktop.gala.gschema.xml.in	2019-06-14 20:53:38.684601000 +0200
+@@ -278,4 +278,20 @@
+ 			<summary>Only show corner masks on primary monitor</summary>
+ 		</key>
+ 	</schema>
++    
++    <schema path="/org/pantheon/desktop/gala/rounded-corners/" id="org.pantheon.desktop.gala.rounded-corners" gettext-domain="@GETTEXT_PACKAGE@">
++		<key type="d" name="corner-radius">
++			<default>6.5</default>
++			<summary></summary>
++		</key>
++        <key type="d" name="corner-offset">
++			<default>1.0</default>
++			<summary></summary>
++		</key>
++        <key type="d" name="smoothing-level">
++			<default>2.0</default>
++			<summary></summary>
++		</key>
++	</schema>
++    
+ </schemalist>

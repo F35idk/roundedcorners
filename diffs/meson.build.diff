@@ -1,0 +1,10 @@
+--- meson.build	2019-06-22 12:58:40.074256000 +0200
++++ new-meson.build	2019-06-08 15:25:22.573077000 +0200
+@@ -267,6 +267,7 @@
+ subdir('plugins/pip')
+ subdir('plugins/template')
+ subdir('plugins/zoom')
++subdir('plugins/roundedcorners')
+ if get_option('documentation')
+ 	subdir('docs')
+ endif

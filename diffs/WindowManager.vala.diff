@@ -1,0 +1,12 @@
+--- WindowManager.vala	2019-06-22 12:58:40.094256000 +0200
++++ new-WindowManager.vala	2019-06-22 13:05:07.671596000 +0200
+@@ -1356,6 +1356,9 @@
+ 			}
+ 
+ 			actor.remove_all_transitions ();
++            Clutter.Actor? texture_actor = actor.get_texture ();
++            if (texture_actor != null)
++                texture_actor.remove_effect_by_name ("corner_effect");
+ 
+ 			switch (window.window_type) {
+ 				case WindowType.NORMAL:
