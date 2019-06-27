@@ -44,6 +44,9 @@ namespace Gala.Plugins.RoundedCorners
             window.size_changed.connect (this.on_window_update);
         }
         
+        // due to what is seemingly a bug with applying shader effects to meta.windowactors, the bottom parts
+        // of a window will become transparent when it reaches a certain size and position. thus, we have to check
+        // the window size and position every time it updates, and remove or add the corner effects accordingly.
         void on_window_update (Meta.Window window)
         {
             Clutter.Actor? texture_actor = this.get_texture_actor (window);
@@ -113,8 +116,7 @@ namespace Gala.Plugins.RoundedCorners
         
         public override void paint_target () 
         {
-            float texture_width;
-            float texture_height;
+            float texture_width, texture_height;
             this.get_target_size (out texture_width, out texture_height);
             
             this.set_uniform_value ("width", texture_width);
