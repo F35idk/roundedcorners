@@ -71,7 +71,6 @@ namespace Gala.Plugins.RoundedCorners
         {
             Clutter.Actor? texture_actor = this.get_texture_actor (window);
             if (texture_actor != null && texture_actor.get_effect ("corner_effect") == null) {
-                
                 var settings = RoundedCornerSettings.get_default ();
                 string shader_source;
                 if (window.decorated)
