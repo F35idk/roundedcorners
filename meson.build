@@ -1,11 +1,11 @@
-gala_transparentgrab_sources = [
+gala_roundedcorners_sources = [
 	'Main.vala',
 	'Settings.vala',
 ]
 
-gala_transparentgrab_lib = shared_library(
-	'gala-transparentgrab',
-	gala_transparentgrab_sources,
+gala_roundedcorners_lib = shared_library(
+	'gala-roundedcorners',
+	gala_roundedcorners_sources,
 	dependencies: [gala_dep, gala_base_dep],
 	include_directories: config_inc_dir,
 	install: true,
